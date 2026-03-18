@@ -25,7 +25,7 @@
 <div id="sitePage" class="page">
 
   <header class="header">
-    <h1>Happy Happy Baby ❤</h1>
+    <h1>Happy Valentine's Day ❤</h1>
     <nav>
       <a href="index.html" class="active">Home</a>
       <a href="#letters">Letters</a>
@@ -34,8 +34,10 @@
       <a href="#scratch">Scratch</a>
       <a href="wheel.html">Date Night</a>
       <a href="gallery.html">Museum</a>
-    </nav>
-  </header>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 
   <!-- BANNER -->
   <section class="banner-image">
@@ -94,7 +96,7 @@
   <!-- REASONS I LOVE YOU -->
   <section id="why-i-love-you" class="reasons-section fade-in">
     <h2>Why I love you 💕</h2>
-    <p class="subtitle">There are too many reasons</p>
+    <p class="subtitle">There are too many reasons — here are a few</p>
     <div class="reasons-carousel">
       <button class="reason-arrow prev" id="reasonPrev">&#8592;</button>
       <div class="reason-card-wrapper">
@@ -110,13 +112,13 @@
 
   <!-- SCRATCH CARD -->
   <section id="scratch" class="scratch-section fade-in">
-    <h2>Scratch &amp; Reveal </h2>
-    <p class="subtitle">Something just for you</p>
+    <h2>Scratch &amp; Reveal 🎴</h2>
+    <p class="subtitle">Something just for you, hidden underneath</p>
     <div class="scratch-wrapper">
       <div class="scratch-container">
         <canvas id="scratchCanvas"></canvas>
         <div class="scratch-reveal" id="scratchReveal">
-          <p id="scratchMessage">💖 I love you more than words can say, you are my favorite person, even if you poop yourself sometimes 💖</p>
+          <p id="scratchMessage">💖 I love you more than words can say. You are my favorite person, my safest place, and my greatest adventure. Always. 💖</p>
         </div>
       </div>
       <button class="scratch-reset" onclick="resetScratch()">Try again ↺</button>
@@ -127,5 +129,22 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+  var hbtn = document.getElementById("hamburger");
+  var nav  = document.querySelector("nav");
+  if (hbtn && nav) {
+    hbtn.addEventListener("click", function() {
+      hbtn.classList.toggle("open");
+      nav.classList.toggle("open");
+    });
+    // close when a link is tapped
+    nav.querySelectorAll("a").forEach(function(a) {
+      a.addEventListener("click", function() {
+        hbtn.classList.remove("open");
+        nav.classList.remove("open");
+      });
+    });
+  }
+</script>
 </body>
 </html>
