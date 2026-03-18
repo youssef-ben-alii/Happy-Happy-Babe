@@ -12,7 +12,7 @@
 <div id="hearts-container"></div>
 
 <header class="header">
-  <h1>Happy Happy Baby ❤</h1>
+  <h1>Happy Valentine's Day ❤</h1>
   <nav>
     <a href="index.html">Home</a>
     <a href="index.html#letters">Letters</a>
@@ -21,7 +21,9 @@
     <a href="index.html#scratch">Scratch</a>
     <a href="wheel.html">Date Night</a>
     <a href="gallery.html" class="active">Museum</a>
-  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <div class="museum">
@@ -37,26 +39,26 @@
       <button class="museum-arrow prev" id="prevBtn" aria-label="Previous">&#8592;</button>
       <button class="museum-arrow next" id="nextBtn" aria-label="Next">&#8594;</button>
 
-      <div class="museum-slide active"><div class="museum-frame"><img src="images/1.jpg" alt="Memory 1"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/2.jpg" alt="Memory 2"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/3.jpg" alt="Memory 3"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/4.jpg" alt="Memory 4"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/5.jpg" alt="Memory 5"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/6.jpg" alt="Memory 6"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/7.jpg" alt="Memory 7"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/8.jpg" alt="Memory 8"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/9.jpg" alt="Memory 9"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/10.jpg" alt="Memory 10"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/11.jpg" alt="Memory 11"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/12.jpg" alt="Memory 12"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/13.jpg" alt="Memory 13"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/14.jpg" alt="Memory 14"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/15.jpg" alt="Memory 15"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/16.jpg" alt="Memory 16"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/17.jpg" alt="Memory 17"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/18.jpg" alt="Memory 18"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/19.jpg" alt="Memory 19"></div></div>
-      <div class="museum-slide"><div class="museum-frame"><img src="images/20.jpg" alt="Memory 20"></div></div>
+      <div class="museum-slide active"><div class="museum-frame"><img src="images/photo1.jpg" alt="Memory 1"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo2.jpg" alt="Memory 2"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo3.jpg" alt="Memory 3"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo4.jpg" alt="Memory 4"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo5.jpg" alt="Memory 5"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo6.jpg" alt="Memory 6"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo7.jpg" alt="Memory 7"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo8.jpg" alt="Memory 8"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo9.jpg" alt="Memory 9"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo10.jpg" alt="Memory 10"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo11.jpg" alt="Memory 11"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo12.jpg" alt="Memory 12"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo13.jpg" alt="Memory 13"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo14.jpg" alt="Memory 14"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo15.jpg" alt="Memory 15"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo16.jpg" alt="Memory 16"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo17.jpg" alt="Memory 17"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo18.jpg" alt="Memory 18"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo19.jpg" alt="Memory 19"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/photo20.jpg" alt="Memory 20"></div></div>
 
     </div>
   </div>
@@ -110,5 +112,22 @@
 </script>
 
 <script src="script.js"></script>
+<script>
+  var hbtn = document.getElementById("hamburger");
+  var nav  = document.querySelector("nav");
+  if (hbtn && nav) {
+    hbtn.addEventListener("click", function() {
+      hbtn.classList.toggle("open");
+      nav.classList.toggle("open");
+    });
+    // close when a link is tapped
+    nav.querySelectorAll("a").forEach(function(a) {
+      a.addEventListener("click", function() {
+        hbtn.classList.remove("open");
+        nav.classList.remove("open");
+      });
+    });
+  }
+</script>
 </body>
 </html>
