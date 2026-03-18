@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Valentine's Day ❤</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="hearts-container"></div>
+
+<!-- ═══ QUIZ PAGE ═══ -->
+<div id="quizPage" class="page active">
+  <div class="quiz-box">
+    <h1>Before you enter 💗</h1>
+    <div class="quiz-progress" id="quizProgress"></div>
+    <p id="question"></p>
+    <div id="options"></div>
+  </div>
+</div>
+
+<!-- ═══ MAIN SITE ═══ -->
+<div id="sitePage" class="page">
+
+  <header class="header">
+    <h1>Happy Happy Baby ❤</h1>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="#letters">Letters</a>
+      <a href="#memory-jar">Memory Jar</a>
+      <a href="#why-i-love-you">Why I love you</a>
+      <a href="#scratch">Scratch</a>
+      <a href="wheel.html">Date Night</a>
+      <a href="gallery.html">Museum</a>
+    </nav>
+  </header>
+
+  <!-- BANNER -->
+  <section class="banner-image">
+    <img class="banner-img" src="images/banner.png" alt="Love Banner">
+  </section>
+
+  <!-- TIMER -->
+  <section class="timer-section fade-in">
+    <h2>We have been together for</h2>
+    <div id="timer" class="timer"></div>
+  </section>
+
+  <!-- LOVE LETTERS -->
+  <section id="letters" class="love-letter fade-in">
+    <h2>Open when… 💌</h2>
+    <p class="subtitle">A letter for every moment you need me</p>
+    <div class="letter-buttons">
+      <button onclick="openLetter(0)">When you are sad</button>
+      <button onclick="openLetter(1)">When you are happy</button>
+      <button onclick="openLetter(2)">When you are stressed</button>
+      <button onclick="openLetter(3)">When you are hungry</button>
+      <button onclick="openLetter(4)">When you are angry</button>
+      <button onclick="openLetter(5)">When you miss me</button>
+      <button onclick="openLetter(6)">When you want me</button>
+      <button onclick="openLetter(7)">My promise to you</button>
+    </div>
+  </section>
+
+  <!-- LETTER MODAL -->
+  <div id="letterModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeLetter()">&times;</span>
+      <h3 id="letterTitle"></h3>
+      <p id="letterText"></p>
+      <img id="letterImage" src="" alt="Letter image">
+    </div>
+  </div>
+
+  <!-- MEMORY JAR -->
+  <section id="memory-jar" class="memory-jar-section fade-in">
+    <h2>Memory Jar 🫙</h2>
+    <p class="subtitle">Every time you miss us, shake the jar</p>
+    <div class="jar-wrapper">
+      <div class="jar" id="memoryJar" onclick="drawMemory()">
+        <div class="jar-shine"></div>
+        <div class="jar-label">Our<br>Memories</div>
+        <div class="jar-hearts">❤ 💕 💗 💓 ❤ 💖 🩷</div>
+      </div>
+      <p class="jar-hint">tap the jar</p>
+    </div>
+    <div class="memory-card" id="memoryCard">
+      <p id="memoryText"></p>
+    </div>
+  </section>
+
+  <!-- REASONS I LOVE YOU -->
+  <section id="why-i-love-you" class="reasons-section fade-in">
+    <h2>Why I love you 💕</h2>
+    <p class="subtitle">There are too many reasons</p>
+    <div class="reasons-carousel">
+      <button class="reason-arrow prev" id="reasonPrev">&#8592;</button>
+      <div class="reason-card-wrapper">
+        <div class="reason-card" id="reasonCard">
+          <span class="reason-number" id="reasonNum">#1</span>
+          <p id="reasonText"></p>
+        </div>
+      </div>
+      <button class="reason-arrow next" id="reasonNext">&#8594;</button>
+    </div>
+    <p class="reason-counter" id="reasonCounter">1 / 20</p>
+  </section>
+
+  <!-- SCRATCH CARD -->
+  <section id="scratch" class="scratch-section fade-in">
+    <h2>Scratch &amp; Reveal </h2>
+    <p class="subtitle">Something just for you</p>
+    <div class="scratch-wrapper">
+      <div class="scratch-container">
+        <canvas id="scratchCanvas"></canvas>
+        <div class="scratch-reveal" id="scratchReveal">
+          <p id="scratchMessage">💖 I love you more than words can say, you are my favorite person, even if you poop yourself sometimes 💖</p>
+        </div>
+      </div>
+      <button class="scratch-reset" onclick="resetScratch()">Try again ↺</button>
+    </div>
+  </section>
+
+  <footer>Made with endless love ❤</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

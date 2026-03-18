@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Date Night Picker ❤</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="hearts-container"></div>
+
+<header class="header">
+  <h1>Happy Valentine's Day ❤</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#letters">Letters</a>
+    <a href="index.html#memory-jar">Memory Jar</a>
+    <a href="index.html#why-i-love-you">Why I love you</a>
+    <a href="index.html#scratch">Scratch</a>
+    <a href="wheel.html" class="active">Date Night</a>
+    <a href="gallery.html">Museum</a>
+  </nav>
+</header>
+
+<main class="wheel-page">
+
+  <div class="wheel-page-hero">
+    <h2>Date Night Picker</h2>
+    <p class="subtitle">Because we can never decide what to do</p>
+  </div>
+
+  <div class="wheel-area">
+    <div class="wheel-container">
+      <canvas id="wheelCanvas" width="440" height="440"></canvas>
+      <div class="wheel-center-pin"></div>
+      <div class="wheel-pointer">▼</div>
+    </div>
+    <button class="spin-btn" id="spinBtn">Spin ✦</button>
+    <div class="wheel-result" id="wheelResult">
+      <span id="wheelResultText"></span>
+    </div>
+  </div>
+
+  <div class="wheel-ideas-list">
+    <p class="ideas-label">What's on the wheel</p>
+    <ul id="wheelIdeasList"></ul>
+  </div>
+
+</main>
+
+<footer>Made with endless love ❤</footer>
+
+<!-- Quiz gate -->
+<script>
+  if (localStorage.getItem("quizPassed") !== "true") {
+    window.location.href = "index.html";
+  }
+</script>
+
+<!-- Floating hearts from script.js still runs for ambiance -->
+<script src="script.js"></script>
+
+<!-- ══════════════════════════════════════════
+     WHEEL — fully self-contained, runs after
+     the DOM is ready via DOMContentLoaded
+════════════════════════════════════════════ -->
+<script>
+(function() {
+  var IDEAS = [
+    "Movie marathon",
+    "Go eat something",
+    "Midnight car ride",
+    "Gaming Night",
+    "Board games",
+    "Dance lesson together",
+    "walk with chicos",
+    "review new food",
+    "cinema date"
+
+  ];
+
+  var COLORS = [
+    "#8b0000","#c9184a","#6b0010","#ff4d6d","#a01030",
+    "#e8305a","#5a000e","#d4204a","#b01840","#ff6b82"
+  ];
+
+  var angle    = 0;
+  var spinning = false;
+
+  function draw(a) {
+    var canvas = document.getElementById("wheelCanvas");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var W   = canvas.width;
+    var H   = canvas.height;
+    var cx  = W / 2;
+    var cy  = H / 2;
+    var r   = cx - 6;
+    var n   = IDEAS.length;
+    var arc = (2 * Math.PI) / n;
+
+    ctx.clearRect(0, 0, W, H);
+
+    for (var i = 0; i < n; i++) {
+      var start = a + i * arc;
+      var end   = start + arc;
+
+      /* ── slice ── */
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, start, end);
+      ctx.closePath();
+      ctx.fillStyle   = COLORS[i % COLORS.length];
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.18)";
+      ctx.lineWidth   = 1.5;
+      ctx.stroke();
+
+      /* ── label ──
+         Place text at 62% of radius along the slice midpoint,
+         then rotate 90° so it reads top-to-bottom along the spoke.
+         This keeps every label legible regardless of position.      */
+      var mid  = start + arc / 2;
+      var dist = r * 0.62;
+      var tx   = cx + Math.cos(mid) * dist;
+      var ty   = cy + Math.sin(mid) * dist;
+
+      ctx.save();
+      ctx.translate(tx, ty);
+      ctx.rotate(mid + Math.PI / 2);   /* perpendicular to spoke */
+      ctx.textAlign    = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle    = "rgba(255,255,255,0.95)";
+      ctx.font         = "bold 12px Montserrat, sans-serif";
+      ctx.shadowColor  = "rgba(0,0,0,0.7)";
+      ctx.shadowBlur   = 4;
+
+      /* split into two lines if the label has more than one word */
+      var words = IDEAS[i].split(" ");
+      if (words.length === 1) {
+        ctx.fillText(words[0], 0, 0);
+      } else {
+        var half = Math.ceil(words.length / 2);
+        var top  = words.slice(0, half).join(" ");
+        var bot  = words.slice(half).join(" ");
+        ctx.fillText(top, 0, -8);
+        ctx.fillText(bot, 0,  8);
+      }
+
+      ctx.restore();
+    }
+
+    /* ── outer ring ── */
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+    ctx.strokeStyle = "rgba(255,255,255,0.28)";
+    ctx.lineWidth   = 4;
+    ctx.stroke();
+
+    /* ── center dot ── */
+    ctx.beginPath();
+    ctx.arc(cx, cy, 10, 0, 2 * Math.PI);
+    ctx.fillStyle = "white";
+    ctx.fill();
+  }
+
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function spinWheel() {
+    if (spinning) return;
+    spinning = true;
+
+    var btn        = document.getElementById("spinBtn");
+    var resultText = document.getElementById("wheelResultText");
+    if (btn) btn.disabled = true;
+    if (resultText) { resultText.classList.remove("show"); resultText.textContent = ""; }
+
+    var extraSpins  = 6 + Math.random() * 5;
+    var targetAngle = angle + extraSpins * 2 * Math.PI + Math.random() * 2 * Math.PI;
+    var duration    = 4000 + Math.random() * 1500;
+    var startAngle  = angle;
+    var startTime   = null;
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var elapsed  = ts - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      angle = startAngle + (targetAngle - startAngle) * easeOut(progress);
+      draw(angle);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        angle    = targetAngle;
+        spinning = false;
+        if (btn) btn.disabled = false;
+
+        /* which slice is under the top pointer? */
+        var n    = IDEAS.length;
+        var arc  = (2 * Math.PI) / n;
+        /* pointer sits at -PI/2 (12 o'clock) in standard canvas coords */
+        var norm = ((-Math.PI / 2 - angle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+        var idx  = Math.floor(norm / arc) % n;
+
+        if (resultText) {
+          resultText.textContent = "✦ " + IDEAS[idx] + " ✦";
+          setTimeout(function() { resultText.classList.add("show"); }, 50);
+        }
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  /* ── populate ideas list ── */
+  function buildList() {
+    var ul = document.getElementById("wheelIdeasList");
+    if (!ul) return;
+    IDEAS.forEach(function(idea) {
+      var li = document.createElement("li");
+      li.textContent = idea;
+      ul.appendChild(li);
+    });
+  }
+
+  /* ── wire up button & kick off first draw ── */
+  document.addEventListener("DOMContentLoaded", function() {
+    draw(angle);
+    buildList();
+    var btn = document.getElementById("spinBtn");
+    if (btn) btn.addEventListener("click", spinWheel);
+  });
+
+})();
+</script>
+
+</body>
+</html>

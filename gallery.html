@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Museum of Us ❤</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="hearts-container"></div>
+
+<header class="header">
+  <h1>Happy Valentine's Day ❤</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#letters">Letters</a>
+    <a href="index.html#memory-jar">Memory Jar</a>
+    <a href="index.html#why-i-love-you">Why I love you</a>
+    <a href="index.html#scratch">Scratch</a>
+    <a href="wheel.html">Date Night</a>
+    <a href="gallery.html" class="active">Museum</a>
+  </nav>
+</header>
+
+<div class="museum">
+
+  <div class="museum-header">
+    <h2>Museum of Us</h2>
+    <p class="subtitle">Twenty frames. One story.</p>
+  </div>
+
+  <div class="museum-stage">
+    <div class="museum-track">
+
+      <button class="museum-arrow prev" id="prevBtn" aria-label="Previous">&#8592;</button>
+      <button class="museum-arrow next" id="nextBtn" aria-label="Next">&#8594;</button>
+
+      <div class="museum-slide active"><div class="museum-frame"><img src="images/1.jpg" alt="Memory 1"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/2.jpg" alt="Memory 2"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/3.jpg" alt="Memory 3"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/4.jpg" alt="Memory 4"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/5.jpg" alt="Memory 5"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/6.jpg" alt="Memory 6"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/7.jpg" alt="Memory 7"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/8.jpg" alt="Memory 8"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/9.jpg" alt="Memory 9"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/10.jpg" alt="Memory 10"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/11.jpg" alt="Memory 11"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/12.jpg" alt="Memory 12"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/13.jpg" alt="Memory 13"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/14.jpg" alt="Memory 14"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/15.jpg" alt="Memory 15"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/16.jpg" alt="Memory 16"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/17.jpg" alt="Memory 17"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/18.jpg" alt="Memory 18"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/19.jpg" alt="Memory 19"></div></div>
+      <div class="museum-slide"><div class="museum-frame"><img src="images/20.jpg" alt="Memory 20"></div></div>
+
+    </div>
+  </div>
+
+  <div class="museum-dots" id="museumDots"></div>
+
+</div>
+
+<footer>Every picture is a heartbeat ❤</footer>
+
+<script>
+  if (localStorage.getItem("quizPassed") !== "true") {
+    window.location.href = "index.html";
+  }
+
+  const slides     = document.querySelectorAll(".museum-slide");
+  const dotsWrap   = document.getElementById("museumDots");
+  let current = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement("button");
+    d.className = "museum-dot" + (i === 0 ? " active" : "");
+    d.setAttribute("aria-label", "Go to slide " + (i + 1));
+    d.onclick = () => goTo(i);
+    dotsWrap.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove("active");
+    dotsWrap.children[current].classList.remove("active");
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add("active");
+    dotsWrap.children[current].classList.add("active");
+  }
+
+  document.getElementById("prevBtn").onclick = () => goTo(current - 1);
+  document.getElementById("nextBtn").onclick = () => goTo(current + 1);
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft")  goTo(current - 1);
+    if (e.key === "ArrowRight") goTo(current + 1);
+  });
+
+  let touchStartX = 0;
+  document.addEventListener("touchstart", e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener("touchend",   e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+  });
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
