@@ -25,8 +25,8 @@
 <div id="sitePage" class="page">
 
   <header class="header">
-    <h1>Happy Valentine's Day ❤</h1>
-    <nav>
+  <h1>Happy Happy Baby ❤</h1>
+  <nav>
       <a href="index.html" class="active">Home</a>
       <a href="#letters">Letters</a>
       <a href="#memory-jar">Memory Jar</a>
@@ -34,7 +34,8 @@
       <a href="#scratch">Scratch</a>
       <a href="wheel.html">Date Night</a>
       <a href="gallery.html">Museum</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+  </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </header>
@@ -129,22 +130,27 @@
 </div>
 
 <script src="script.js"></script>
+
 <script>
-  var hbtn = document.getElementById("hamburger");
-  var nav  = document.querySelector("nav");
-  if (hbtn && nav) {
-    hbtn.addEventListener("click", function() {
-      hbtn.classList.toggle("open");
-      nav.classList.toggle("open");
+function initHamburger() {
+  var btn = document.getElementById("hamburger");
+  var nav = document.querySelector("nav");
+  if (!btn || !nav) return;
+  btn.addEventListener("click", function() {
+    btn.classList.toggle("open");
+    nav.classList.toggle("open");
+  });
+  nav.querySelectorAll("a").forEach(function(a) {
+    a.addEventListener("click", function() {
+      btn.classList.remove("open");
+      nav.classList.remove("open");
     });
-    // close when a link is tapped
-    nav.querySelectorAll("a").forEach(function(a) {
-      a.addEventListener("click", function() {
-        hbtn.classList.remove("open");
-        nav.classList.remove("open");
-      });
-    });
-  }
+  });
+}
+// If quiz already passed, init now; otherwise enterSite() will call it
+if (localStorage.getItem("quizPassed") === "true") {
+  document.addEventListener("DOMContentLoaded", initHamburger);
+}
 </script>
 </body>
 </html>
