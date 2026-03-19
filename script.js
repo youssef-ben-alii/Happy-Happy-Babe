@@ -62,6 +62,7 @@ function enterSite() {
   localStorage.setItem("quizPassed", "true");
   if (quizPage) quizPage.classList.remove("active");
   if (sitePage) sitePage.classList.add("active");
+  if (typeof initHamburger === "function") initHamburger();
 }
 
 if (questionEl) loadQuiz();
@@ -113,7 +114,7 @@ function openLetter(i) {
   const modal = document.getElementById("letterModal");
   if (!modal) return;
   document.getElementById("letterTitle").textContent = letters[i].title;
-  document.getElementById("letterText").innerHTML = letters[i].text;
+ document.getElementById("letterText").innerHTML = letters[i].text;
   const img = document.getElementById("letterImage");
   img.src = letters[i].image || "";
   img.style.display = letters[i].image ? "block" : "none";
@@ -326,16 +327,15 @@ if (document.getElementById("scratchCanvas")) initScratch();
    DATE NIGHT SPINNING WHEEL
 ═══════════════════════════════════════════ */
 const dateIdeas = [
-  "Movie marathon at home",
-  "Cook together",
-  "Midnight walk",
-  "Spa night",
-  "Board games",
-  "Dance in the kitchen",
-  "Picnic under the stars",
-  "Binge a new series",
-  "Make a scrapbook",
-  "Drive with no plan",
+    "Movie marathon",
+    "Go eat something",
+    "Midnight car ride",
+    "Gaming Night",
+    "Board games",
+    "Dance lesson together",
+    "walk with chicos",
+    "review new food",
+    "cinema date"
 ];
 
 const wheelColors = [
