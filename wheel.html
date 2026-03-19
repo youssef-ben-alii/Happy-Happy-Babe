@@ -12,23 +12,26 @@
 <div id="hearts-container"></div>
 
 <header class="header">
-  <h1>Happy Happy Baby ❤</h1>
+  <h1>Happy Valentine's Day ❤</h1>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="index.html#letters">Letters</a>
-    <a href="index.html#memory-jar">Memory Jar</a>
-    <a href="index.html#why-i-love-you">Why I love you</a>
-    <a href="index.html#scratch">Scratch</a>
-    <a href="wheel.html" class="active">Date Night</a>
-    <a href="gallery.html">Museum</a>
+      <a href="index.html">Home</a>
+      <a href="index.html#letters">Letters</a>
+      <a href="index.html#memory-jar">Memory Jar</a>
+      <a href="index.html#why-i-love-you">Why I love you</a>
+      <a href="index.html#scratch">Scratch</a>
+      <a href="wheel.html" class="active">Date Night</a>
+      <a href="gallery.html">Museum</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <main class="wheel-page">
 
   <div class="wheel-page-hero">
     <h2>Date Night Picker</h2>
-    <p class="subtitle">Because we can never decide what to do</p>
+    <p class="subtitle">Can't decide what to do tonight? Let fate choose for you</p>
   </div>
 
   <div class="wheel-area">
@@ -78,7 +81,6 @@
     "walk with chicos",
     "review new food",
     "cinema date"
-
   ];
 
   var COLORS = [
@@ -238,5 +240,23 @@
 })();
 </script>
 
+
+<script>
+(function() {
+  var btn = document.getElementById("hamburger");
+  var nav = document.querySelector("nav");
+  if (!btn || !nav) return;
+  btn.addEventListener("click", function() {
+    btn.classList.toggle("open");
+    nav.classList.toggle("open");
+  });
+  nav.querySelectorAll("a").forEach(function(a) {
+    a.addEventListener("click", function() {
+      btn.classList.remove("open");
+      nav.classList.remove("open");
+    });
+  });
+})();
+</script>
 </body>
 </html>
