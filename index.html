@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Happy Baby ❤</title>
+  <title>Happy Valentine's Day ❤</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -25,8 +25,8 @@
 <div id="sitePage" class="page">
 
   <header class="header">
-  <h1>Happy Happy Baby ❤</h1>
-  <nav>
+    <h1>Happy Happy Baby ❤</h1>
+    <nav>
       <a href="index.html" class="active">Home</a>
       <a href="#letters">Letters</a>
       <a href="#memory-jar">Memory Jar</a>
@@ -34,11 +34,9 @@
       <a href="#scratch">Scratch</a>
       <a href="wheel.html">Date Night</a>
       <a href="gallery.html">Museum</a>
-  </nav>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</header>
+      <a href="garden.html">Garden</a>
+    </nav>
+  </header>
 
   <!-- BANNER -->
   <section class="banner-image">
@@ -97,7 +95,7 @@
   <!-- REASONS I LOVE YOU -->
   <section id="why-i-love-you" class="reasons-section fade-in">
     <h2>Why I love you 💕</h2>
-    <p class="subtitle">There are too many reasons — here are a few</p>
+    <p class="subtitle">There are too many reasons</p>
     <div class="reasons-carousel">
       <button class="reason-arrow prev" id="reasonPrev">&#8592;</button>
       <div class="reason-card-wrapper">
@@ -114,7 +112,7 @@
   <!-- SCRATCH CARD -->
   <section id="scratch" class="scratch-section fade-in">
     <h2>Scratch &amp; Reveal </h2>
-    <p class="subtitle">Something just for you, hidden underneath</p>
+    <p class="subtitle">Something just for you</p>
     <div class="scratch-wrapper">
       <div class="scratch-container">
         <canvas id="scratchCanvas"></canvas>
@@ -130,27 +128,6 @@
 </div>
 
 <script src="script.js"></script>
-
-<script>
-function initHamburger() {
-  var btn = document.getElementById("hamburger");
-  var nav = document.querySelector("nav");
-  if (!btn || !nav) return;
-  btn.addEventListener("click", function() {
-    btn.classList.toggle("open");
-    nav.classList.toggle("open");
-  });
-  nav.querySelectorAll("a").forEach(function(a) {
-    a.addEventListener("click", function() {
-      btn.classList.remove("open");
-      nav.classList.remove("open");
-    });
-  });
-}
-// If quiz already passed, init now; otherwise enterSite() will call it
-if (localStorage.getItem("quizPassed") === "true") {
-  document.addEventListener("DOMContentLoaded", initHamburger);
-}
-</script>
+<script src="jukebox.js"></script>
 </body>
 </html>
