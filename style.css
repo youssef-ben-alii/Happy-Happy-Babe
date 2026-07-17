@@ -85,6 +85,53 @@ nav a {
 nav a:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.3); color: white; }
 nav a.active { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.4); color: white; }
 
+/* ─── MOBILE NAV (checkbox-driven, no JS needed) ─── */
+.nav-toggle-input { display: none; }
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 19px;
+  cursor: pointer;
+  flex-shrink: 0;
+  z-index: 101;
+}
+.nav-toggle-label span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+.nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+.nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(2) { opacity: 0; }
+.nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+@media (max-width: 700px) {
+  .nav-toggle-label { display: flex; }
+  nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: linear-gradient(135deg, #8b0000, #c9184a);
+    padding: 10px 20px 20px;
+    box-shadow: 0 16px 30px rgba(139,0,0,0.4);
+  }
+  .nav-toggle-input:checked ~ nav { display: flex; }
+  nav a {
+    text-align: center;
+    padding: 13px 16px;
+    font-size: 0.82rem;
+    border-radius: 12px;
+  }
+}
+
 /* ─── WHEEL PAGE ─── */
 .wheel-page {
   min-height: 100vh;
@@ -687,6 +734,29 @@ nav a.active { background: rgba(255,255,255,0.22); border-color: rgba(255,255,25
   text-transform: uppercase;
 }
 
+.garden-link-btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 34px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: white;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: transform .3s, background .3s, box-shadow .3s;
+}
+.garden-link-btn:hover {
+  background: rgba(255,255,255,0.28);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+
 /* ─── TIMELINE ─── */
 .timeline-section {
   padding: 100px 20px;
@@ -942,6 +1012,31 @@ footer {
   .timer-number { font-size: 2rem; }
   .modal-content { padding: 48px 24px 36px; }
   .quiz-box { padding: 36px 24px; }
+
+  /* banner was a full 100vh tall strip on phones, making it feel
+     stretched and out of proportion — cap it to a shorter, wider
+     ratio instead */
+  .banner-image { height: 56vh; min-height: 320px; }
+
+  .love-letter { padding: 80px 16px; }
+  .love-letter h2 { font-size: 2.1rem; }
+  .letter-buttons { gap: 12px; }
+  .letter-buttons button { padding: 16px 22px; font-size: 0.85rem; }
+
+  .memory-jar-section, .scratch-section, .reasons-section { padding: 70px 16px; }
+
+  .reasons-carousel { gap: 10px; }
+  .reason-card { padding: 32px 20px; min-height: 170px; }
+  .reason-card p { font-size: 1.2rem; }
+  .reason-arrow { width: 40px; height: 40px; font-size: 1rem; }
+
+  .scratch-container { width: 100%; max-width: 340px; }
+
+  .museum-track { padding: 0 46px; }
+  .museum-arrow { width: 44px; height: 44px; font-size: 1.05rem; }
+  .museum-header h2 { font-size: 2.2rem; }
+
+  .wheel-page-hero h2 { font-size: 2.2rem; }
 }
 /* ─── JUKEBOX WIDGET ─── */
 .jukebox-launcher {
